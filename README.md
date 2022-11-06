@@ -11,14 +11,14 @@ This is a frontend server for ECOM.
 2. node (recommended: v14.17.5)
 3. npm (recommended: v6.14.14)
 
-### Server requirements:
+### Microservice requirements:
 1. ecom-account-service (recommended: https://github.com/reyhanfikridz/ecom-account-service/tree/release-1)
 2. ecom-product-service (recommended: https://github.com/reyhanfikridz/ecom-product-service/tree/release-1)
 3. ecom-order-service (recommended: https://github.com/reyhanfikridz/ecom-order-service/tree/release-1)
 
 ### Steps to run the server:
 1. install all requirements
-2. install and run all server requirements
+2. install and run all microservice requirements
 3. clone repository
 4. create python virtual environment with `python -m venv <environment desired name>` at same level directory of repository
 5. use the python virtual environment with `source <environment desired name>/Scripts/activate` (windows) or `source <environment desired name>/bin/activate` (linux) at same level directory of repository
