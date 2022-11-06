@@ -1,0 +1,21 @@
+{
+  "name": "ecom",
+  "version": "1.0.0",
+  "description": "a simple E-Commerce with Go backend microservices and Django frontend",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.2.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "gasparesganga-jquery-loading-overlay": "^2.1.7",
+    "jquery": "^3.6.0",
+    "js-cookie": "^3.0.1",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
+  }
+}

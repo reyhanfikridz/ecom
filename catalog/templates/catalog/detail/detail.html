@@ -1,0 +1,80 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+{% load converter_templatetags %}
+
+{% block title %}Catalog | Detail{% endblock %}
+
+{% block style %}
+{% endblock %}
+
+{% block content %}
+  <div class="container mt-3 mb-3">
+    <div>
+      <a class="btn btn-sm btn-outline-secondary" href="{% url 'catalog:list' %}"><- Back To Catalog</a>
+    </div>
+    <div class="mt-3">
+      <h3>{{data.product_info.name}}</h3>
+    </div>
+    <div class="d-flex justify-content-between mt-3">
+      <div class="w-50">
+        {% if data and data.product_images %}
+          <img class="img-fluid" src="{{PRODUCT_SERVICE_URL}}/media/{{data.product_images.0.image_path}}">
+        {% else %}
+          <i>Product does not have images</i>
+        {% endif %}
+      </div>
+      <div class="w-50 ms-3">
+        <div>
+          <h5>Seller</h5>
+          <p>{{data.seller_info.full_name}}</p>
+        </div>
+        <div>
+          <h5>Description</h5>
+          <p style="word-wrap: break-word;">{{data.product_info.description}}</p>
+        </div>
+        <div>
+          <h5>Price</h5>
+          <p>{{data.product_info.price|convert_to_rupiah}}</p>
+        </div>
+        <div>
+          <h5>Stock</h5>
+          <p>{{data.product_info.stock}}</p>
+        </div>
+        <form onsubmit="return false;" id="form_add_to_cart">
+          <div class="d-flex justify-content-left">
+            <div class="me-3 w-25">
+              <input type="hidden" id="input-product-id" name="product_id" value="{{data.product_info.id}}">
+              <input type="hidden" id="input-product-sku" name="product_sku" value="{{data.product_info.sku}}">
+              <input type="hidden" id="input-product-name" name="product_name" value="{{data.product_info.name}}">
+              <input type="hidden" id="input-product-description" name="product_description" value="{{data.product_info.description}}">
+              <input type="hidden" id="input-product-price" name="product_price" value="{{data.product_info.price}}">
+              <input type="hidden" id="input-product-weight" name="product_weight" value="{{data.product_info.weight}}">
+              <input type="hidden" id="input-product-stock" name="product_stock" value="{{data.product_info.stock}}">
+              <input type="hidden" id="input-product-user-id" name="product_user_id" value="{{data.product_info.user_id}}">
+              <input type="hidden" id="input-product-user-full-name" name="product_user_full_name" value="{{data.seller_info.full_name}}">
+              {% for product_image in data.product_images %}
+                <input type="hidden" id="input-product-images-path" name="product_images_path" value="{{product_image.image_path}}">
+              {% endfor %}
+              <input type="hidden" id="input-total-price" name="total_price">
+              <input type="hidden" name="buyer_full_name" value="{{request.user.full_name}}">
+              <input type="hidden" name="buyer_address" value="{{request.user.address}}">
+              <input min="1" type="number" id="input-qty" name="qty" class="form-control" placeholder="Qty">
+            </div>
+            <div>
+              <h4 id="display-total-price">Rp0.00</h4>
+            </div>
+          </div>
+          <div class="mt-3">
+            <input class="btn btn-primary" type="submit" value="Add To Cart +">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script src="{% static 'account/dist/js/logout/logout.js' %}"></script>
+  <script src="{% static 'catalog/dist/js/detail/detail.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% load static %}
+<nav class="navbar navbar-dark" style="background-color: #3786bd;">
+  <div class="container-fluid">
+    {% if request.user.role == 'staff' %}
+      <a href="{% url 'order:list' %}" class="navbar-brand">ECOM STAFF</a>
+    {% else %}
+      <a href="{% url 'catalog:list' %}" class="navbar-brand">ECOM</a>
+    {% endif %}
+    <div class="d-flex justify-content-between">
+      {% if request.user.role == 'buyer' %}
+        <a href="{% url 'order:cart' %}" class="btn btn-outline-light me-2 {{order_cart_active}}">
+          Cart
+        </a>
+      {% endif %}
+      {% if request.user.role != 'staff' %}
+        <a href="{% url 'order:list' %}" class="btn btn-outline-dark me-2 {{order_list_active}}">
+          Order List
+        </a>
+      {% endif %}
+      <form method="GET" onsubmit="return false;" id="logout_form">
+        <input type="hidden" name="login_url" value="{% url 'account:login' %}">
+        <button type="submit" class="btn btn-secondary">Logout</button>
+      </form>
+    </div>
+  </div>
+</nav>

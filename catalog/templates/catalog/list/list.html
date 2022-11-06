@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+{% load converter_templatetags %}
+
+{% block title %}Catalog | List{% endblock %}
+
+{% block style %}
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      {% if data %}
+        {% for item in data %}
+          <div class="col-md-4 mt-3">
+            <div class="card">
+              <div class="card-body">
+                <div class="mb-3 text-center">
+                  {% if item.product_images %}
+                    <img class="img-fluid" src="{{PRODUCT_SERVICE_URL}}/media/{{item.product_images.0.image_path}}">
+                  {% else %}
+                    <i>Product does not have images</i>
+                  {% endif %}
+                </div>
+                <h5 class="card-title">{{item.product_info.name}}</h5>
+                <p class="card-text">{{item.product_info.price|convert_to_rupiah}}</p>
+                <a href="{% url 'catalog:detail' %}?sku={{item.product_info.sku}}" class="btn btn-primary">Detail</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td class="text-center" colspan="6">You do not have product yet</td>
+        </tr>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script src="{% static 'account/dist/js/logout/logout.js' %}"></script>
+{% endblock %}

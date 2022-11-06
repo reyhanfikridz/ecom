@@ -1,0 +1,62 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+{% load converter_templatetags %}
+
+{% block title %}Catalog | Table{% endblock %}
+
+{% block style %}
+{% endblock %}
+
+{% block content %}
+  <div class="container mt-3">
+    <div class="d-flex justify-content-end">
+      <a class="btn btn-sm btn-primary" href="{% url 'catalog:manage' %}">Add Product</a>
+    </div>
+    <table class="table mt-3">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th style="width: 300px;">Preview</th>
+          <th>SKU</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if data %}
+          {% for item in data %}
+            <tr>
+              <td>{{forloop.counter}}</td>
+              <td>
+                {% if item.product_images %}
+                  <img class="img-fluid" src="{{PRODUCT_SERVICE_URL}}/media/{{item.product_images.0.image_path}}">
+                {% else %}
+                  <i>Product does not have images</i>
+                {% endif %}
+              </td>
+              <td>{{item.product_info.sku}}</td>
+              <td>{{item.product_info.name}}</td>
+              <td>{{item.product_info.price|convert_to_rupiah}}</td>
+              <td>
+                <a class="btn btn-sm btn-warning" href="{% url 'catalog:manage' %}?sku={{item.product_info.sku}}">Edit</a>
+                <button class="btn btn-sm btn-danger open-delete-modal-btn" data-bs-toggle="modal" data-bs-target="#delete-product-modal" sku="{{item.product_info.sku}}">Delete</button>
+              </td>
+            </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td class="text-center" colspan="6">You do not have product yet</td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+  {% include 'catalog/table/delete_modal.html' %}
+{% endblock %}
+
+{% block script %}
+  <script src="{% static 'account/dist/js/logout/logout.js' %}"></script>
+  <script src="{% static 'catalog/dist/js/table/delete.js' %}"></script>
+{% endblock %}
