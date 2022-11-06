@@ -4,7 +4,7 @@
 ECOM is a simple E-Commerce website builded with Go backend microservices and Django frontend. Disclaimer! I have zero real experience in building E-Commerce system, so if the system is really bad, I apologized in advance. This is just my personal project using Go microservices. You can use all the code of this project as a template for real E-Commerce in the future if you like it. Disclaimer again! I also not a frontend specialist, so I just use a free template I found in the internet and an original bootstrap template.
 
 ### Repository summary:
-This is a microservice for ECOM that related to customer account CRUD.
+This is a frontend server for ECOM.
 
 ### Requirements:
 1. python (recommended: v3.9.10)
