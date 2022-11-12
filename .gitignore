@@ -1,3 +1,9 @@
-core/config.py
 node_modules
 package-lock.json
+*.pyc
+*.pyo
+
+account/static/account/dist/
+catalog/static/catalog/dist/
+order/static/order/dist/
+core/config.py
